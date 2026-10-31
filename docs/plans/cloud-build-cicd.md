@@ -41,8 +41,8 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 - [ ] Evaluate Cloud Build 2nd-generation GitHub repository connections.
 - [ ] Identify required APIs, IAM, and setup prerequisites.
 - [ ] Configure GitHub authorization.
-- [ ] Provision the repository connection and push trigger using Terraform where practical.
-- [ ] Configure the trigger for pushes to `main`.
+- [ ] Provision the repository connection and pull request trigger using Terraform where practical.
+- [ ] Configure the trigger for every PR targeting `main`.
 - [ ] Configure the dedicated Cloud Build execution service account.
 
 ### Phase 4 — End-to-End Validation
