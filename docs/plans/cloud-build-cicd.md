@@ -28,13 +28,26 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 ### Phase 2 — Cloud Build Pipeline
 
 - [x] Inspect existing Dockerfiles and build contexts.
-- [ ] Create `cloudbuild.yaml`.
+- [x] Create `cloudbuild.yaml`.
 - [ ] Build both Docker images.
 - [ ] Tag images using Git commit SHA.
 - [ ] Push both images to Artifact Registry.
 - [ ] Deploy images by immutable digest where practical.
-- [ ] Configure Cloud Logging.
-- [ ] Validate pipeline configuration.
+- [x] Configure Cloud Logging.
+- [x] Validate pipeline configuration.
+
+Pipeline configuration is implemented in the root `cloudbuild.yaml`. Local
+validation passed YAML parsing, Bash syntax checks, build input checks, and a
+mocked build/push/digest/deploy flow, including missing-SHA and invalid-digest
+rejection. This does not validate Cloud Build's server-side acceptance or live IAM.
+Build, tag, push, and deployment checklist items remain pending an approved live
+execution; no images have been built or deployed as part of this task.
+
+The configuration uses the existing `cloud-build-sa` identity and
+`CLOUD_LOGGING_ONLY`. The future PR trigger must explicitly select that same
+identity because trigger settings override the configuration's service account.
+Deployment updates only each existing service's image, using its pushed digest.
+Updates to the two services are sequential and are not atomic.
 
 ### Phase 3 — GitHub Integration
 
