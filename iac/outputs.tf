@@ -12,3 +12,8 @@ output "cloud_run_urls" {
     name => service.uri
   }
 }
+
+output "cloud_build_sa_email" {
+  value = google_service_account.cloud_build.email
+}
+

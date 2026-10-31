@@ -1,7 +1,7 @@
 locals {
   services = {
-    service-a = google_service_account.service_a.email
-    service-b = google_service_account.service_b.email
+    service-a = google_service_account.service_a
+    service-b = google_service_account.service_b
   }
 }
 
@@ -23,7 +23,7 @@ resource "google_cloud_run_v2_service" "microservices" {
   }
 
   template {
-    service_account = each.value
+    service_account = each.value.email
 
     scaling {
       min_instance_count = 0

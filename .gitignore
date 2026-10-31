@@ -220,5 +220,6 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Temp files
-*.swp
+*.sw*
 *.un~
+/.idea/
