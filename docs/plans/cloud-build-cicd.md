@@ -22,12 +22,12 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 - [x] Grant Artifact Registry Writer on the existing repository.
 - [x] Grant Cloud Run Developer on both Cloud Run services.
 - [x] Grant Service Account User on both runtime service accounts.
-- [ ] Verify Cloud Logging Writer permission has been applied.
+- [x] Verify Cloud Logging Writer permission has been applied.
 - [ ] Validate permissions through a successful Cloud Build execution.
 
 ### Phase 2 — Cloud Build Pipeline
 
-- [ ] Inspect existing Dockerfiles and build contexts.
+- [x] Inspect existing Dockerfiles and build contexts.
 - [ ] Create `cloudbuild.yaml`.
 - [ ] Build both Docker images.
 - [ ] Tag images using Git commit SHA.
