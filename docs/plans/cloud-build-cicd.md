@@ -23,6 +23,7 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 - [x] Grant Cloud Run Developer on both Cloud Run services.
 - [x] Grant Service Account User on both runtime service accounts.
 - [x] Verify Cloud Logging Writer permission has been applied.
+- [ ] Grant the build identity read access to the manual source staging bucket through Terraform, review the plan, and obtain approval before applying.
 - [ ] Validate permissions through a successful Cloud Build execution.
 
 ### Phase 2 — Cloud Build Pipeline
@@ -36,6 +37,7 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 - [ ] Deploy images by immutable digest where practical.
 - [x] Configure Cloud Logging.
 - [x] Validate pipeline configuration.
+- [x] Document local testing, Terraform, IAM, build, and deployment verification commands in `docs/commands.md`.
 
 Pipeline configuration is implemented in the root `cloudbuild.yaml`. Local
 upload inspection with `gcloud meta list-files-for-upload` confirmed that only
