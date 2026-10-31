@@ -33,9 +33,13 @@ resource "google_cloud_run_v2_service_iam_member" "cloud_build_developer" {
 resource "google_service_account_iam_member" "cloud_build_runtime_user" {
   for_each = local.services
 
-  service_account_id = google_service_account.service_a.name
+  service_account_id = each.value.name
   role               = "roles/iam.serviceAccountUser"
   member             = "serviceAccount:${google_service_account.cloud_build.email}"
 }
 
-
+resource "google_project_iam_member" "cloud_build_logging" {
+  project = var.project_id
+  role    = "roles/logging.logWriter"
+  member  = "serviceAccount:${google_service_account.cloud_build.email}"
+}
