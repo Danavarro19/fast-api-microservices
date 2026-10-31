@@ -1,0 +1,31 @@
+# Exclude everything by default
+*
+
+# Include pipeline and Docker build inputs
+!/cloudbuild.yaml
+!/services/
+!/services/*/
+!/services/*/Dockerfile
+!/services/*/.dockerignore
+!/services/*/pyproject.toml
+!/services/*/uv.lock
+!/services/*/app/
+!/services/*/app/**
+
+# Exclude secrets and local artifacts inside app directories
+.env
+.env.*
+*.pem
+*.key
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+.git/
+.aws/
+.gcp/
+.venv/
+__pycache__/
+*.py[cod]
+*.swp
+*.swo

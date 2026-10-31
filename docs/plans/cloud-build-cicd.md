@@ -29,6 +29,7 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 
 - [x] Inspect existing Dockerfiles and build contexts.
 - [x] Create `cloudbuild.yaml`.
+- [x] Add `.gcloudignore` and verify the source upload excludes infrastructure and local files.
 - [ ] Build both Docker images.
 - [ ] Tag images using Git commit SHA.
 - [ ] Push both images to Artifact Registry.
@@ -37,6 +38,11 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 - [x] Validate pipeline configuration.
 
 Pipeline configuration is implemented in the root `cloudbuild.yaml`. Local
+upload inspection with `gcloud meta list-files-for-upload` confirmed that only
+`cloudbuild.yaml` and the services' Dockerfiles, `.dockerignore` files,
+dependency definitions, lockfiles, and application source are included.
+Terraform state, variables, providers, and local environments are excluded.
+Local
 validation passed YAML parsing, Bash syntax checks, build input checks, and a
 mocked build/push/digest/deploy flow, including missing-SHA and invalid-digest
 rejection. This does not validate Cloud Build's server-side acceptance or live IAM.
