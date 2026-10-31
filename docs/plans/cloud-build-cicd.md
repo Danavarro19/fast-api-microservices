@@ -24,38 +24,20 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 - [x] Grant Service Account User on both runtime service accounts.
 - [x] Verify Cloud Logging Writer permission has been applied.
 - [x] Grant the Cloud Build service account Storage Object Viewer on the source staging bucket for manual builds.
-- [ ] Validate permissions through a successful Cloud Build execution.
+- [x] Validate permissions through a successful Cloud Build execution.
 
 ### Phase 2 — Cloud Build Pipeline
 
 - [x] Inspect existing Dockerfiles and build contexts.
 - [x] Create `cloudbuild.yaml`.
 - [x] Add `.gcloudignore` and verify the source upload excludes infrastructure and local files.
-- [ ] Build both Docker images.
-- [ ] Tag images using Git commit SHA.
-- [ ] Push both images to Artifact Registry.
-- [ ] Deploy images by immutable digest where practical.
+- [x] Build both Docker images.
+- [x] Tag images using Git commit SHA.
+- [x] Push both images to Artifact Registry.
+- [x] Deploy images by immutable digest where practical.
 - [x] Configure Cloud Logging.
 - [x] Validate pipeline configuration.
 - [x] Document local testing, Terraform, IAM, build, and deployment verification commands in `docs/commands.md`.
-
-Pipeline configuration is implemented in the root `cloudbuild.yaml`. Local
-upload inspection with `gcloud meta list-files-for-upload` confirmed that only
-`cloudbuild.yaml` and the services' Dockerfiles, `.dockerignore` files,
-dependency definitions, lockfiles, and application source are included.
-Terraform state, variables, providers, and local environments are excluded.
-Local
-validation passed YAML parsing, Bash syntax checks, build input checks, and a
-mocked build/push/digest/deploy flow, including missing-SHA and invalid-digest
-rejection. This does not validate Cloud Build's server-side acceptance or live IAM.
-Build, tag, push, and deployment checklist items remain pending an approved live
-execution; no images have been built or deployed as part of this task.
-
-The configuration uses the existing `cloud-build-sa` identity and
-`CLOUD_LOGGING_ONLY`. The future PR trigger must explicitly select that same
-identity because trigger settings override the configuration's service account.
-Deployment updates only each existing service's image, using its pushed digest.
-Updates to the two services are sequential and are not atomic.
 
 ### Phase 3 — GitHub Integration
 
