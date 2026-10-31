@@ -52,3 +52,10 @@ resource "google_artifact_registry_repository_iam_member" "cloud_build_writer" {
   role   = "roles/artifactregistry.writer"
   member = "serviceAccount:${google_service_account.cloud_build.email}"
 }
+
+# Read source archives in gcloud storage bucket (For manual executions)
+resource "google_storage_bucket_iam_member" "cloud_build_source_reader" {
+  bucket = "${var.project_id}_cloudbuild"
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:${google_service_account.cloud_build.email}"
+}

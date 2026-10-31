@@ -23,7 +23,7 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 - [x] Grant Cloud Run Developer on both Cloud Run services.
 - [x] Grant Service Account User on both runtime service accounts.
 - [x] Verify Cloud Logging Writer permission has been applied.
-- [ ] Grant the build identity read access to the manual source staging bucket through Terraform, review the plan, and obtain approval before applying.
+- [x] Grant the Cloud Build service account Storage Object Viewer on the source staging bucket for manual builds.
 - [ ] Validate permissions through a successful Cloud Build execution.
 
 ### Phase 2 — Cloud Build Pipeline
