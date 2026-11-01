@@ -4,7 +4,7 @@
 
 Implement automated CI/CD for two FastAPI microservices using Google Cloud Build.
 
-Every PR to `main` triggers a pipeline that builds, publishes, and deploys both microservices to Cloud Run.
+Every push to `main`, including PR merges, triggers the existing `cloudbuild.yaml` pipeline to build both images, push them to Artifact Registry, and deploy both microservices to Cloud Run.
 
 ## Architecture
 
@@ -44,14 +44,15 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 - [ ] Evaluate Cloud Build 2nd-generation GitHub repository connections.
 - [ ] Identify required APIs, IAM, and setup prerequisites.
 - [ ] Configure GitHub authorization.
-- [ ] Provision the repository connection and pull request trigger using Terraform where practical.
-- [ ] Configure the trigger for every PR targeting `main`.
+- [ ] Provision the repository connection and push-to-main trigger using Terraform where practical.
+- [ ] Configure the push trigger to match only `main` (`^main$`), including PR merges, and use the existing `cloudbuild.yaml`.
 - [ ] Configure the dedicated Cloud Build execution service account.
 
 ### Phase 4 — End-to-End Validation
 
-- [ ] Create a PR with a test change to `main`.
-- [ ] Verify Cloud Build execution.
+- [ ] Create a PR with a test change targeting `main` and verify that opening or updating the PR does not trigger deployment.
+- [ ] Merge the approved PR into `main` and verify that the resulting push triggers the deployment pipeline.
+- [ ] Verify Cloud Build executes the existing `cloudbuild.yaml` for the pushed `main` commit.
 - [ ] Verify both images exist in Artifact Registry.
 - [ ] Verify deployed Cloud Run image digests and revisions.
 - [ ] Test both `/health` endpoints.
@@ -59,7 +60,9 @@ Every PR to `main` triggers a pipeline that builds, publishes, and deploys both 
 
 ## Constraints
 
-- Build both services on every PR to `main`.
+- Build and deploy both services on every push to `main`, including PR merges.
+- Use one `cloudbuild.yaml` to build both images, push them to Artifact Registry, and deploy them to Cloud Run.
+- Opening or updating a PR must not trigger deployment.
 - No Nx or selective build detection.
 - No long-lived service account keys.
 - Prefer Terraform for infrastructure configuration.
