@@ -62,7 +62,6 @@ Every push to `main`, including PR merges, triggers the existing `cloudbuild.yam
 
 - Build and deploy both services on every push to `main`, including PR merges.
 - Use one `cloudbuild.yaml` to build both images, push them to Artifact Registry, and deploy them to Cloud Run.
-- Do not introduce a separate CI pipeline or additional YAML files.
 - Opening or updating a PR must not trigger deployment.
 - No Nx or selective build detection.
 - No long-lived service account keys.
