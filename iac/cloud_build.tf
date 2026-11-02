@@ -11,3 +11,32 @@ resource "google_cloudbuildv2_connection" "github" {
     }
   }
 }
+
+resource "google_cloudbuildv2_repository" "microservices" {
+  project           = var.project_id
+  location          = var.region
+  name              = "fast-api-microservices"
+  parent_connection = google_cloudbuildv2_connection.github.id
+  remote_uri        = "https://github.com/Danavarro19/fast-api-microservices.git"
+}
+
+resource "google_cloudbuild_trigger" "main" {
+  project         = var.project_id
+  location        = var.region
+  name            = "microservices-main"
+  filename        = "cloudbuild.yaml"
+  service_account = google_service_account.cloud_build.name
+
+  repository_event_config {
+    repository = google_cloudbuildv2_repository.microservices.id
+
+    push {
+      branch = "^main$"
+    }
+  }
+
+  substitutions = {
+    _REGION     = var.region
+    _REPOSITORY = google_artifact_registry_repository.microservices.repository_id
+  }
+}
