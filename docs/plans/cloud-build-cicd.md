@@ -41,9 +41,10 @@ Every push to `main`, including PR merges, triggers the existing `cloudbuild.yam
 
 ### Phase 3 — GitHub Integration
 
-- [ ] Evaluate Cloud Build 2nd-generation GitHub repository connections.
-- [ ] Identify required APIs, IAM, and setup prerequisites.
-- [ ] Configure GitHub authorization.
+- [x] Evaluate Cloud Build 2nd-generation GitHub repository connections.
+- [x] Identify required APIs, IAM, and setup prerequisites.
+- [x] Configure GitHub authorization.
+- [x] Import the existing GitHub connection into Terraform.
 - [ ] Provision the repository connection and push-to-main trigger using Terraform where practical.
 - [ ] Configure the push trigger to match only `main` (`^main$`), including PR merges, and use the existing `cloudbuild.yaml`.
 - [ ] Configure the dedicated Cloud Build execution service account.
