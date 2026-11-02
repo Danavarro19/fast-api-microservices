@@ -59,3 +59,14 @@ resource "google_storage_bucket_iam_member" "cloud_build_source_reader" {
   role   = "roles/storage.objectViewer"
   member = "serviceAccount:${google_service_account.cloud_build.email}"
 }
+
+resource "google_cloud_run_v2_service_iam_member" "public_access" {
+  for_each = google_cloud_run_v2_service.microservices
+
+  project  = var.project_id
+  location = var.region
+  name     = each.value.name
+
+  role   = "roles/run.invoker"
+  member = "allUsers"
+}

@@ -55,14 +55,3 @@ resource "google_cloud_run_v2_service" "microservices" {
     google_project_service.required_apis
   ]
 }
-
-resource "google_cloud_run_v2_service_iam_member" "public_access" {
-  for_each = google_cloud_run_v2_service.microservices
-
-  project  = var.project_id
-  location = var.region
-  name     = each.value.name
-
-  role   = "roles/run.invoker"
-  member = "allUsers"
-}
