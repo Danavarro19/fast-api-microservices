@@ -45,7 +45,7 @@ Every push to `main`, including PR merges, triggers the existing `cloudbuild.yam
 - [x] Identify required APIs, IAM, and setup prerequisites.
 - [x] Configure GitHub authorization.
 - [x] Import the existing GitHub connection into Terraform.
-- [ ] Provision the repository connection and push-to-main trigger using Terraform where practical.
+- [x] Provision the repository connection and push-to-main trigger using Terraform where practical.
 - [x] Configure the push trigger to match only `main` (`^main$`), including PR merges, and use the existing `cloudbuild.yaml`.
 - [x] Configure the dedicated Cloud Build execution service account.
 

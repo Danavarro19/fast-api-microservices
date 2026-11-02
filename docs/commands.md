@@ -159,6 +159,17 @@ terraform -chdir=iac import google_cloudbuildv2_connection.github \
 terraform -chdir=iac plan
 ```
 
+## Inspect the GitHub repository and trigger
+
+Read-only checks for the linked repository, branch filter, pipeline, and execution identity.
+
+```bash
+gcloud builds repositories describe fast-api-microservices \
+  --connection=github-connection --project="$PROJECT_ID" --region="$REGION"
+gcloud builds triggers describe microservices-main \
+  --project="$PROJECT_ID" --region="$REGION"
+```
+
 ## Inspect IAM bindings
 
 These commands inspect policies, not effective access. Conditions, inherited
