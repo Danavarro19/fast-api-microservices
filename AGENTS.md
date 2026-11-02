@@ -14,6 +14,7 @@ Infrastructure is managed using Terraform under `iac/`.
 - Preserve separation between infrastructure management and application deployment.
 - Use least-privilege IAM and avoid long-lived credentials.
 - Explain significant architectural decisions and trade-offs.
+- Record relevant project setup commands in `docs/commands.md` with a short explanation. Keep examples reusable; do not add execution history or failed-run descriptions.
 
 ## Working process
 

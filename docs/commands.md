@@ -147,6 +147,18 @@ terraform -chdir=iac apply reviewed.tfplan
 After application deployment, run `terraform -chdir=iac plan` to inspect drift.
 Terraform ignores container image changes; other unexpected changes need review.
 
+## Import the GitHub connection
+
+After browser authorization creates the connection, define its matching resource
+in `iac/cloud_build.tf`. Import it once per Terraform state, then check the plan.
+Import updates Terraform state without modifying the existing GCP connection.
+
+```bash
+terraform -chdir=iac import google_cloudbuildv2_connection.github \
+  "projects/${PROJECT_ID}/locations/${REGION}/connections/github-connection"
+terraform -chdir=iac plan
+```
+
 ## Inspect IAM bindings
 
 These commands inspect policies, not effective access. Conditions, inherited
