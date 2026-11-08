@@ -166,9 +166,11 @@ Read-only checks for the linked repository, branch filter, pipeline, and executi
 ```bash
 gcloud builds repositories describe fast-api-microservices \
   --connection=github-connection --project="$PROJECT_ID" --region="$REGION"
-gcloud builds triggers describe microservices-main \
+gcloud builds triggers describe service-a-main \
   --project="$PROJECT_ID" --region="$REGION"
 ```
+
+Use `service-b-main` or `service-c-main` to inspect the other service triggers.
 
 ## Inspect IAM bindings
 

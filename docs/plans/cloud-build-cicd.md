@@ -2,9 +2,9 @@
 
 ## Objective
 
-Implement automated CI/CD for two FastAPI microservices using Google Cloud Build.
+Implement automated CI/CD for three FastAPI microservices using Google Cloud Build.
 
-Every push to `main`, including PR merges, triggers the existing `cloudbuild.yaml` pipeline to build both images, push them to Artifact Registry, and deploy both microservices to Cloud Run.
+Pushes to `main`, including PR merges, trigger independent builds and deployments for services with matching file changes, using the shared `cloudbuild.yaml`.
 
 ## Architecture
 
@@ -65,12 +65,21 @@ Every push to `main`, including PR merges, triggers the existing `cloudbuild.yam
 - [x] Add service-c's runtime service account and Terraform service-map entry.
 - [x] Use a shared service list in all pipeline steps and include service-c.
 
+### Phase 6 — Selective Service Builds
+
+- [x] Define one push-to-main trigger per service with service-directory and shared-pipeline file filters.
+- [x] Set each trigger's `_SERVICES` substitution to its service name.
+- [x] Validate independent service pipeline execution locally and review the Terraform plan.
+- [ ] Replace the combined trigger with the per-service triggers in GCP.
+- [ ] Verify single-service and multiple-service changes trigger only the affected service builds.
+- [ ] Verify shared-pipeline changes trigger all service builds and documentation-only changes trigger none.
+
 ## Constraints
 
-- Build and deploy both services on every push to `main`, including PR merges.
-- Use one `cloudbuild.yaml` to build both images, push them to Artifact Registry, and deploy them to Cloud Run.
+- Build and deploy each service independently on matching file changes pushed to `main`, including PR merges.
+- Use one shared `cloudbuild.yaml` with a per-trigger service substitution.
 - Opening or updating a PR must not trigger deployment.
-- No Nx or selective build detection.
+- Use native Cloud Build file filters for selective builds; no Nx or custom Git comparison scripts.
 - No long-lived service account keys.
 - Prefer Terraform for infrastructure configuration.
 - Preserve existing Cloud Run runtime identities and settings.

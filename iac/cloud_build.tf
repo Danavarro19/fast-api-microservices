@@ -20,12 +20,19 @@ resource "google_cloudbuildv2_repository" "microservices" {
   remote_uri        = "https://github.com/Danavarro19/fast-api-microservices.git"
 }
 
-resource "google_cloudbuild_trigger" "main" {
+resource "google_cloudbuild_trigger" "services" {
+  for_each = local.services
+
   project         = var.project_id
   location        = var.region
-  name            = "microservices-main"
+  name            = "${each.key}-main"
   filename        = "cloudbuild.yaml"
   service_account = google_service_account.cloud_build.name
+
+  included_files = [
+    "services/${each.key}/**",
+    "cloudbuild.yaml"
+  ]
 
   repository_event_config {
     repository = google_cloudbuildv2_repository.microservices.id
@@ -38,5 +45,6 @@ resource "google_cloudbuild_trigger" "main" {
   substitutions = {
     _REGION     = var.region
     _REPOSITORY = google_artifact_registry_repository.microservices.repository_id
+    _SERVICES   = each.key
   }
 }
