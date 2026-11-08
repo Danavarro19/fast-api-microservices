@@ -10,6 +10,12 @@ resource "google_service_account" "service_b" {
   display_name = "Service B runtime"
 }
 
+resource "google_service_account" "service_c" {
+  project      = var.project_id
+  account_id   = "service-c-sa"
+  display_name = "Service C runtime"
+}
+
 resource "google_service_account" "cloud_build" {
   project      = var.project_id
   account_id   = "cloud-build-sa"

@@ -59,6 +59,12 @@ Every push to `main`, including PR merges, triggers the existing `cloudbuild.yam
 - [ ] Test both `/health` endpoints.
 - [ ] Run `terraform plan` and check for unintended infrastructure drift.
 
+### Phase 5 — Service C
+
+- [x] Create service-c with a health endpoint, dependency lockfile, Dockerfile, and Docker build exclusions.
+- [x] Add service-c's runtime service account and Terraform service-map entry.
+- [x] Use a shared service list in all pipeline steps and include service-c.
+
 ## Constraints
 
 - Build and deploy both services on every push to `main`, including PR merges.

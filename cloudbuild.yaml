@@ -3,6 +3,7 @@ substitutions:
   _REGION: us-central1
   _REPOSITORY: microservices
   _BUILD_SERVICE_ACCOUNT: cloud-build-sa
+  _SERVICES: "service-a service-b service-c"
 
 # Cloud Build service account
 serviceAccount: projects/$PROJECT_ID/serviceAccounts/${_BUILD_SERVICE_ACCOUNT}@$PROJECT_ID.iam.gserviceaccount.com
@@ -25,7 +26,7 @@ steps:
         echo 'COMMIT_SHA must be a full 40-character Git commit SHA.' >&2
         exit 1
       }
-      for service in service-a service-b; do
+      for service in ${_SERVICES}; do
         image="${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${service}"
         docker build --tag "${image}:${COMMIT_SHA}" "services/${service}"
       done
@@ -36,7 +37,7 @@ steps:
     script: |
       #!/usr/bin/env bash
       set -euo pipefail
-      for service in service-a service-b; do
+      for service in ${_SERVICES}; do
         image="${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${service}"
         docker push "${image}:${COMMIT_SHA}"
       done
@@ -47,7 +48,7 @@ steps:
     script: |
       #!/usr/bin/env bash
       set -euo pipefail
-      for service in service-a service-b; do
+      for service in ${_SERVICES}; do
         image="${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${service}"
         reference="$(docker image inspect "${image}:${COMMIT_SHA}" \
           --format '{{index .RepoDigests 0}}')"
@@ -65,7 +66,7 @@ steps:
     script: |
       #!/usr/bin/env bash
       set -euo pipefail
-      for service in service-a service-b; do
+      for service in ${_SERVICES}; do
         image="$(cat "/workspace/${service}-image.txt")"
         gcloud run services update "${service}" \
           --image="${image}" \
