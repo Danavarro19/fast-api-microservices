@@ -63,6 +63,7 @@ Every push to `main`, including PR merges, triggers the existing `cloudbuild.yam
 
 - [x] Create service-c with a health endpoint, dependency lockfile, Dockerfile, and Docker build exclusions.
 - [x] Add service-c's runtime service account and Terraform service-map entry.
+- [x] Use a shared service list in all pipeline steps and include service-c.
 
 ## Constraints
 
