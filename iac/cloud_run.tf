@@ -2,6 +2,7 @@ locals {
   services = {
     service-a = google_service_account.service_a
     service-b = google_service_account.service_b
+    service-c = google_service_account.service_c
   }
 }
 

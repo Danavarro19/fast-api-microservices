@@ -62,6 +62,7 @@ Every push to `main`, including PR merges, triggers the existing `cloudbuild.yam
 ### Phase 5 — Service C
 
 - [x] Create service-c with a health endpoint, dependency lockfile, Dockerfile, and Docker build exclusions.
+- [x] Add service-c's runtime service account and Terraform service-map entry.
 
 ## Constraints
 
