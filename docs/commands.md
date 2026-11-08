@@ -58,6 +58,16 @@ curl --fail-with-body http://localhost:8082/health
 
 Expect the corresponding service name and `"status":"active"`.
 
+## Test services
+
+Install locked development dependencies and run the health-endpoint test.
+
+```bash
+uv run --directory services/service-a --locked pytest
+uv run --directory services/service-b --locked pytest
+uv run --directory services/service-c --locked pytest
+```
+
 ## Build and run Docker images
 
 **Changes local Docker state:** builds both images using separate build contexts.

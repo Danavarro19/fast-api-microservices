@@ -74,6 +74,14 @@ Pushes to `main`, including PR merges, trigger independent builds and deployment
 - [ ] Verify single-service and multiple-service changes trigger only the affected service builds.
 - [ ] Verify shared-pipeline changes trigger all service builds and documentation-only changes trigger none.
 
+### Phase 7 — Service Tests
+
+- [x] Add pytest as a development dependency and health-endpoint tests for all services.
+- [x] Run tests for each selected service in one pipeline loop before image building.
+- [x] Include all service tests in manual source uploads and document local test commands.
+- [x] Validate all health tests, service selection, and test failure propagation locally.
+- [ ] Verify each service's tests run successfully in Cloud Build before deployment.
+
 ## Constraints
 
 - Build and deploy each service independently on matching file changes pushed to `main`, including PR merges.

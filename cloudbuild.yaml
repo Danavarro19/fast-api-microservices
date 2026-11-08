@@ -15,6 +15,16 @@ options:
   automapSubstitutions: true
 
 steps:
+  # Run tests
+  - id: test-services
+    name: ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+    script: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+      for service in ${_SERVICES}; do
+        uv run --directory "services/${service}" --locked pytest
+      done
+
   # Build images
   - id: build-images
     name: gcr.io/cloud-builders/docker

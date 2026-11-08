@@ -11,6 +11,8 @@
 !/services/*/uv.lock
 !/services/*/app/
 !/services/*/app/**
+!/services/*/tests/
+!/services/*/tests/**
 
 # Exclude secrets and local artifacts inside app directories
 .env
@@ -26,6 +28,7 @@
 .gcp/
 .venv/
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *.swp
 *.swo
